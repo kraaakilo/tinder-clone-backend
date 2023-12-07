@@ -58,6 +58,11 @@ class User extends Authenticatable
         return $this->hasMany(MatchUser::class, 'matcher_id');
     }
 
+    public function passions()
+    {
+        return $this->hasMany(Passion::class);
+    }
+
     public static function booted()
     {
         parent::boot();

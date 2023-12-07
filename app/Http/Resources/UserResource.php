@@ -25,18 +25,9 @@ class UserResource extends JsonResource
             "country" => code_to_country($this->country),
             "birthday" => $this->birthday,
             "age" => Carbon::parse($this->birthday)->diffInYears(Carbon::now()),
-            "avatar"=> "https://i.pravatar.cc/300",
-            "photos" => [
-                "https://imageupload.io/ib/BuamCZoiNLfcgHN_1698352667.jpg",
-                "https://imageupload.io/ib/tPnJDgllMNuVNNb_1698352667.webp",
-                "https://imageupload.io/ib/BuamCZoiNLfcgHN_1698352667.jpg"
-            ],
-            "passions" => [
-                "Photography",
-                "Music",
-                "Sports",
-                "Travel",
-            ]
+            "avatar"=> $this->photos()->first()->url,
+            "photos" => $this->photos->pluck("url"),
+            "passions" => $this->passions->pluck("name"),
         ];
     }
 }

@@ -35,9 +35,12 @@ class LoginController extends Controller
             "otp" => "required|numeric"
         ]);
 
-        $login = Login::where("email", $request->email)->firstOrFail();
 
-        if ($login->otp == $request->otp) {
+        $login = Login::where("email", $request->email)->firstOrFail();
+        $logger->info("Login: " . $login);
+        $logger->info("OTP: " . $request->otp);
+
+        if (intval($login->otp) == $request->otp) {
             $user = User::where("email", $request->email)->firstOrFail();
             $token = $user->createToken("auth_token")->plainTextToken;
             return response()->json([
