@@ -10,6 +10,10 @@ use App\Http\Controllers\UploadMediaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
+Route::get("/", function () {
+    return response()->json(["message" => "Service is running!"]);
+});
+
 Route::post("/register", [RegisterController::class, "store"]);
 
 Route::get("/get-otp", [LoginController::class, "getOtp"]);
