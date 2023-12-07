@@ -57,4 +57,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(MatchUser::class, 'matcher_id');
     }
+
+    public static function booted()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            dd($user->profile_picture = "https://ui-avatars.com/api/?name=".implode('+',explode(' ', $user->name))."&size=255");
+        });
+
+    }
+
 }
