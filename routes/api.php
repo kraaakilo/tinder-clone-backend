@@ -18,6 +18,7 @@ Route::get("/", function () {
 });
 
 Route::post("/register", [RegisterController::class, "store"]);
+Route::get("/register/email-check", [RegisterController::class, "checkIsUsedEmail"]);
 
 Route::get("/get-otp", [LoginController::class, "getOtp"]);
 Route::get("/check-otp", [LoginController::class, "checkOtp"]);

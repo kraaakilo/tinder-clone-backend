@@ -19,13 +19,14 @@ class UserResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "id"=> $this->id,
+            "id" => $this->id,
+            "email" => $this->email,
             "name" => $this->name,
             "gender" => $this->gender,
             "country" => code_to_country($this->country),
             "birthday" => $this->birthday,
             "age" => Carbon::parse($this->birthday)->diffInYears(Carbon::now()),
-            "avatar"=> $this->photos()->first()->url,
+            "avatar" => $this->profile_picture,
             "photos" => $this->photos->pluck("url"),
             "passions" => $this->passions->pluck("name"),
         ];

@@ -53,7 +53,7 @@ class User extends Authenticatable
         return $this->hasMany(Photo::class);
     }
 
-    public function matchedUsers() : HasMany
+    public function matchedUsers(): HasMany
     {
         return $this->hasMany(MatchUser::class, 'matcher_id');
     }
@@ -68,9 +68,7 @@ class User extends Authenticatable
         parent::boot();
 
         static::creating(function ($user) {
-            dd($user->profile_picture = "https://ui-avatars.com/api/?name=".implode('+',explode(' ', $user->name))."&size=255");
+            $user->profile_picture = "https://gravatar.com/avatar/" . hash('sha256', $user->email);
         });
-
     }
-
 }

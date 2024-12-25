@@ -12,6 +12,10 @@ class MatchUserController extends Controller
 
     public function store(MatchUserRequest $request)
     {
+        return response()->json([
+            "isMatch" => false,
+        ]);
+
         $this->authorize('create', MatchUser::class);
 
         if (auth()->id() == $request->get('matched_id')) {
